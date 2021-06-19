@@ -26,7 +26,7 @@ export const NavBar = () => {
       shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       align="center"
       w="100%"
-      h="60px"
+      h="7vh"
       bg="#AE0032"
     >
       <Head>
@@ -48,9 +48,9 @@ export const NavBar = () => {
         </Text>
       ) : null}
       {!isPageWide ? (
-        <Flex width="50vh" justify="space-between" align="center">
+        <Flex width="50vw" justify="flex-end" align="center">
           <Input
-            maxWidth="15rem"
+            w="25vw"
             m={3}
             bg="#E5E5E5"
             borderRadius="30px"
