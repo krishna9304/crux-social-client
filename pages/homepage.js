@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import {
   Box,
   Grid,
@@ -17,6 +18,38 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { NavBar } from "../components/navbar";
+import Carousel from "../components/carousel";
+import { ClassmateCard } from "../components/classmatecard";
+import { Post } from "../components/post";
+import { OnlineCard } from "../components/onlineCard";
+
+const arr = [
+  {
+    name: "Krishna Mahato",
+    show: "block",
+    url: "https://source.unsplash.com/WLUHO9A_xik/1440x960",
+  },
+  {
+    name: "Abhay Anand",
+    show: "none",
+    url: "https://source.unsplash.com/DNE9iZ1Kqzk/1440x960",
+  },
+  {
+    name: "Sushree Shriya Mishra",
+    show: "none",
+    url: "https://source.unsplash.com/6ccJQ5qPFvY/1440x960",
+  },
+  {
+    name: "Swetapadma Das",
+    show: "none",
+    url: "https://source.unsplash.com/qTLyiHW1nIc/1440x960",
+  },
+  {
+    name: "Ankit Singh",
+    show: "none",
+    url: "https://source.unsplash.com/fxX__3GRtsg/1440x960",
+  },
+];
 
 export default function HomePage() {
   return (
@@ -41,20 +74,60 @@ export default function HomePage() {
             align="center"
             flexDirection="column"
           >
-            <Flex>
-              <Box
-                borderRadius="2vw"
-                shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+            <Flex
+              justifyContent="flex-start"
+              alignItems="center"
+              borderRadius="2vw"
+              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              m={3}
+              bg="#ffffff"
+              w="23vw"
+              h="10vw"
+            >
+              <Flex
                 m={3}
-                bg="#ffffff"
-                w="23vw"
+                mr={1}
+                justifyContent="center"
+                alignItems="center"
+                w="7vw"
                 h="10vw"
               >
-                <Circle />
-              </Box>
-              <Flex>
-                <Text></Text>
-                <Text></Text>
+                <Circle
+                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  size="6.5vw"
+                  bg={`url(${"/profile.jpeg"})`}
+                  backgroundRepeat="no-repeat"
+                  backgroundSize="cover"
+                />
+              </Flex>
+              <Flex mr={2} flexDir="column" justify="center">
+                <Text
+                  textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  fontWeight="bold"
+                  color="#AE0032"
+                  fontSize="max(1.1vw , 10px)"
+                >
+                  Krishna Mahato
+                </Text>
+                <Link href="/">
+                  <a
+                    style={{
+                      textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      fontWeight: "bold",
+                      fontSize: "max(1.1vw , 10px)",
+                    }}
+                  >
+                    <Text
+                      _hover={{
+                        color: "#600008",
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      }}
+                    >
+                      View Profile
+                    </Text>
+                  </a>
+                </Link>
               </Flex>
             </Flex>
             <Flex flexDir="column">
@@ -86,15 +159,27 @@ export default function HomePage() {
                   Classmates
                 </Text>
               </Box>
-              <Box
+              <Flex
+                overflowY="scroll"
+                flexDir="column"
+                justify="flex-start"
+                align="center"
                 borderRadius="2vw"
                 shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
                 ml={3}
                 mr={3}
+                p={2}
                 bg="#ffffff"
                 w="23vw"
                 h="65vh"
-              ></Box>
+              >
+                {arr.map((item) => {
+                  return <ClassmateCard url={item.url} name={item.name} />;
+                })}
+                {arr.map((item) => {
+                  return <ClassmateCard url={item.url} name={item.name} />;
+                })}
+              </Flex>
             </Flex>
           </Flex>
         </GridItem>
@@ -160,6 +245,7 @@ export default function HomePage() {
                 mr={5}
                 w="45vw"
                 minHeight="5rem"
+                fontSize={12}
                 placeholder="Write a post..."
               />
               <Flex width="48vw" justify="space-between">
@@ -228,9 +314,124 @@ export default function HomePage() {
                 </Button>
               </Flex>
             </Flex>
+            <Flex
+              p={4}
+              mt={4}
+              align="center"
+              justify="flex-start"
+              flexDirection="column"
+              borderRadius="2vw 2vw 0 0"
+              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+              bg="#ffffff"
+              w="48vw"
+              h="auto"
+              minHeight="67vh"
+            >
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+            </Flex>
           </Flex>
         </GridItem>
-        <GridItem colSpan={3} bg="#E5E5E5" />
+        <GridItem colSpan={3} bg="#E5E5E5">
+          <Flex
+            position="sticky"
+            justify="center"
+            align="center"
+            flexDirection="column"
+          >
+            <Flex flexDir="column">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                borderRadius="2vw"
+                shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                mt={3}
+                mr={3}
+                ml={3}
+                bg="#AE0032"
+                w="23vw"
+                h="4vh"
+              >
+                <Text
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  fontSize="1.5vh"
+                  color="#ffffff"
+                  lineHeight="22px"
+                  display="flex"
+                  alignItems="center"
+                  textAlign="center"
+                  textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                >
+                  Clubs
+                </Text>
+              </Box>
+              <Box
+                borderRadius="2vw"
+                shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                ml={3}
+                mr={3}
+                bg="#ffffff"
+                w="23vw"
+                h="13rem"
+              >
+                <Carousel />
+              </Box>
+            </Flex>
+            <Flex flexDir="column">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                textAlign="center"
+                borderRadius="2vw"
+                shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                mt={4}
+                mr={3}
+                ml={3}
+                bg="#AE0032"
+                w="23vw"
+                h="4vh"
+              >
+                <Text
+                  fontStyle="normal"
+                  fontWeight="bold"
+                  fontSize="1.5vh"
+                  color="#ffffff"
+                  lineHeight="22px"
+                  display="flex"
+                  alignItems="center"
+                  textAlign="center"
+                  textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                >
+                  Online Members
+                </Text>
+              </Box>
+              <Flex
+                overflowY="scroll"
+                flexDir="column"
+                justify="flex-start"
+                align="center"
+                borderRadius="2vw"
+                shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                ml={3}
+                mr={3}
+                p={3}
+                bg="#ffffff"
+                w="23vw"
+                h="50vh"
+              >
+                {arr.map((item) => {
+                  return <OnlineCard url={item.url} name={item.name} />;
+                })}
+              </Flex>
+            </Flex>
+          </Flex>
+        </GridItem>
       </Grid>
     </Box>
   );
