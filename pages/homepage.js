@@ -18,12 +18,12 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { NavBar } from "../components/navbar";
-import Carousel from "../components/carousel";
+import Carousel from "../components/clubcarousel";
 import { ClassmateCard } from "../components/classmatecard";
 import { Post } from "../components/post";
 import { OnlineCard } from "../components/onlineCard";
 
-const arr = [
+export const arr = [
   {
     name: "Krishna Mahato",
     show: "block",

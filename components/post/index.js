@@ -12,6 +12,10 @@ import {
   ModalBody,
   ModalFooter,
   useDisclosure,
+  InputGroup,
+  InputRightElement,
+  Input,
+  Divider,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -33,7 +37,7 @@ export const Post = () => {
         justifyContent="flex-start"
         alignItems="center"
         textAlign="center"
-        borderRadius="2vw"
+        borderRadius="1vw 1vw 0 0"
         shadow="xl"
         mr={3}
         ml={3}
@@ -68,7 +72,6 @@ export const Post = () => {
         justifyContent="flex-start"
         alignItems="center"
         textAlign="center"
-        borderRadius="2vw 2vw 0 0"
         shadow="xl"
         mr={3}
         ml={3}
@@ -168,12 +171,28 @@ export const Post = () => {
       </Flex>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>vgfxghgjkghfxfghj</ModalBody>
+        <ModalContent h="35rem" maxH="35rem" minW="25rem" maxW="35vw">
+          <ModalHeader>Comments</ModalHeader>
+          <Divider />
+          <ModalBody></ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
+            <InputGroup>
+              <Input variant="filled" placeholder="Write a message" />
+              <InputRightElement mr={1} width="5rem">
+                <Button
+                  _hover={{
+                    bg: "#600008",
+                  }}
+                  color="#ffffff"
+                  bg="#AE0032"
+                  h="2rem"
+                  size="sm"
+                  p={2}
+                >
+                  Comment
+                </Button>
+              </InputRightElement>
+            </InputGroup>
           </ModalFooter>
         </ModalContent>
       </Modal>

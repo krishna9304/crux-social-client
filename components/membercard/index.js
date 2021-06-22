@@ -1,32 +1,32 @@
 import { Flex, Circle, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { useState } from "react";
-import StudentProfile from "../../pages/studentProfile";
-export const ClassmateCard = (props) => {
+import { useMediaQuery } from "../../pages";
+
+export const MemberCard = (props) => {
+  let isPageWide = useMediaQuery("(max-width: 751px)");
   return (
     <Link href="/studentProfile">
       <Flex
+        className="main-container"
         _hover={{
           cursor: "pointer",
-          bg: "#600008",
-          color: "#ffffff",
+          bg: "#C4C4C4",
         }}
         justifyContent="flex-start"
         alignItems="center"
-        borderRadius="1vw"
-        shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-        bg="#ffffff"
-        border="1px solid #ae0032"
-        color="#600008"
+        shadow="sm"
+        bg="#ddd"
         w="20vw"
-        h="5vw"
+        h="auto"
+        maxH="4.5vw"
+        color="black"
         m={1}
         p={1}
       >
         <Circle
           m="1vw"
           shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-          size="4vw"
+          size="2.5vw"
           bg={`url(${props.url})`}
           backgroundRepeat="no-repeat"
           backgroundSize="cover"
@@ -34,7 +34,7 @@ export const ClassmateCard = (props) => {
         <Text
           textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
           fontWeight="light"
-          fontSize="max(1.3vw , 10px)"
+          fontSize={!isPageWide ? "1.1vw" : 8}
         >
           {props.name}
         </Text>
