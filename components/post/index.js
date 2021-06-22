@@ -1,8 +1,24 @@
-import { Box, Circle, Text, Flex, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Circle,
+  Text,
+  Flex,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 export const Post = () => {
   const [isliked, setliked] = useState(false);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Flex
       mt={2}
@@ -105,6 +121,7 @@ export const Post = () => {
           </Text>
         </Button>
         <Button
+          onClick={onOpen}
           _hover={{ cursor: "pointer" }}
           justify="center"
           align="center"
@@ -149,6 +166,17 @@ export const Post = () => {
           </Text>
         </Button>
       </Flex>
+      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>vgfxghgjkghfxfghj</ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 };

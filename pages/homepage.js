@@ -428,6 +428,9 @@ export default function HomePage() {
                 {arr.map((item) => {
                   return <OnlineCard url={item.url} name={item.name} />;
                 })}
+                {arr.map((item) => {
+                  return <OnlineCard url={item.url} name={item.name} />;
+                })}
               </Flex>
             </Flex>
           </Flex>
