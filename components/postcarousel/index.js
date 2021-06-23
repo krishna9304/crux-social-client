@@ -8,9 +8,6 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   useDisclosure,
   InputGroup,
   InputRightElement,
@@ -54,7 +51,7 @@ const arr = [
 export default function PostCarousel() {
   const [value, setValue] = React.useState(1);
   const [delay, setDelay] = React.useState(5000);
-
+  const [isliked, setliked] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleChange = (e) => {
     if (e.target.id === "+") {
@@ -187,28 +184,139 @@ export default function PostCarousel() {
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent h="83vh" maxH="83vh" minW="20rem" maxW="80vw">
-          <ModalHeader>Comments</ModalHeader>
-          <Divider />
-          <ModalBody></ModalBody>
-          <ModalFooter>
-            <InputGroup>
-              <Input variant="filled" placeholder="Write a message" />
-              <InputRightElement mr={1} width="5rem">
+          <Flex flexGrow="1" h="83vh">
+            <Box
+              m={2}
+              w="55%"
+              h="auto"
+              bg={`url(${"/profile.jpeg"})`}
+              backgroundRepeat="no-repeat"
+              backgroundSize="cover"
+              backgroundPosition="center"
+            />
+
+            <Flex flexDir="column" w="45%" h="83vh">
+              <Flex
+                fontSize={20}
+                justify="center"
+                align="center"
+                fontWeight="light"
+                color="#ffffff"
+                flexDir="column"
+                bg="#AE0032"
+                h="10vh"
+                w="100%"
+              >
+                Krishna Mahato
+              </Flex>
+              <Text h="auto" w="100%" fontSize={14} p={2}>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </Text>
+              <Flex w="100%" h="auto" justify="center" align="center">
                 <Button
-                  _hover={{
-                    bg: "#600008",
+                  onClick={() => {
+                    isliked ? setliked(false) : setliked(true);
                   }}
-                  color="#ffffff"
-                  bg="#AE0032"
-                  h="2rem"
-                  size="sm"
-                  p={2}
+                  _hover={{ cursor: "pointer" }}
+                  justify="center"
+                  align="center"
+                  w="11.6vw"
+                  h="4vh"
+                  border="2px solid #AE0032"
+                  borderRadius="2vw"
+                  shadow="0px 2px 2px rgba(0, 0, 0, 0.25)"
+                  bg={isliked ? "#AE0032" : "white"}
                 >
-                  Comment
+                  <Text
+                    fontStyle="normal"
+                    fontWeight="bold"
+                    fontSize="1.5vh"
+                    color={isliked ? "white" : "#AE0032"}
+                    lineHeight="22px"
+                    textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  >
+                    {isliked ? "Liked" : "Like"}
+                  </Text>
                 </Button>
-              </InputRightElement>
-            </InputGroup>
-          </ModalFooter>
+                <Button
+                  onClick={onOpen}
+                  _hover={{ cursor: "pointer" }}
+                  justify="center"
+                  align="center"
+                  w="11.6vw"
+                  h="4vh"
+                  border="2px solid #AE0032"
+                  borderRadius="2vw"
+                  shadow="0px 2px 2px rgba(0, 0, 0, 0.25)"
+                  bg="#ffffff"
+                >
+                  <Text
+                    fontStyle="normal"
+                    fontWeight="bold"
+                    fontSize="1.5vh"
+                    color="#AE0032"
+                    lineHeight="22px"
+                    textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  >
+                    Comment
+                  </Text>
+                </Button>
+                <Button
+                  _hover={{ cursor: "pointer" }}
+                  justify="center"
+                  align="center"
+                  w="11.6vw"
+                  h="4vh"
+                  border="2px solid #AE0032"
+                  borderRadius="2vw"
+                  shadow="0px 2px 2px rgba(0, 0, 0, 0.25)"
+                  bg="#ffffff"
+                >
+                  <Text
+                    fontStyle="normal"
+                    fontWeight="bold"
+                    fontSize="1.5vh"
+                    color="#AE0032"
+                    lineHeight="22px"
+                    textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+                  >
+                    Share
+                  </Text>
+                </Button>
+              </Flex>
+              <Flex mb={2} bg="blackAlpha.100" w="100%" h="100%"></Flex>
+              <InputGroup mb={2}>
+                <Input
+                  flexWrap="wrap"
+                  variant="filled"
+                  placeholder="Write a message"
+                />
+                <InputRightElement mr={1} width="5rem">
+                  <Button
+                    _hover={{
+                      bg: "#600008",
+                    }}
+                    color="#ffffff"
+                    bg="#AE0032"
+                    h="2rem"
+                    size="sm"
+                    p={2}
+                  >
+                    Comment
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </Flex>
+          </Flex>
         </ModalContent>
       </Modal>
     </>
