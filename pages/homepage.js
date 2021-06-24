@@ -173,11 +173,23 @@ export default function HomePage() {
                 w="23vw"
                 h="65vh"
               >
-                {arr.map((item) => {
-                  return <ClassmateCard url={item.url} name={item.name} />;
+                {arr.map((item, index) => {
+                  return (
+                    <ClassmateCard
+                      key={index}
+                      url={item.url}
+                      name={item.name}
+                    />
+                  );
                 })}
-                {arr.map((item) => {
-                  return <ClassmateCard url={item.url} name={item.name} />;
+                {arr.map((item, index) => {
+                  return (
+                    <ClassmateCard
+                      key={index}
+                      url={item.url}
+                      name={item.name}
+                    />
+                  );
                 })}
               </Flex>
             </Flex>
@@ -425,11 +437,15 @@ export default function HomePage() {
                 w="23vw"
                 h="50vh"
               >
-                {arr.map((item) => {
-                  return <OnlineCard url={item.url} name={item.name} />;
+                {arr.map((item, index) => {
+                  return (
+                    <OnlineCard key={index} url={item.url} name={item.name} />
+                  );
                 })}
-                {arr.map((item) => {
-                  return <OnlineCard url={item.url} name={item.name} />;
+                {arr.map((item, index) => {
+                  return (
+                    <OnlineCard key={index} url={item.url} name={item.name} />
+                  );
                 })}
               </Flex>
             </Flex>

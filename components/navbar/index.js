@@ -11,11 +11,20 @@ import {
   MenuItem,
   MenuDivider,
   Box,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  PopoverCloseButton,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
 import { useMediaQuery } from "../../pages";
+import { MessageCard } from "../messageCards";
+import { arr } from "../../pages/homepage";
 
 export const NavBar = () => {
   let isPageWide = useMediaQuery("(max-width: 743px)");
@@ -58,20 +67,67 @@ export const NavBar = () => {
             placeholder="Search"
             size="sm"
           />
-          <img
-            style={{
-              margin: "10px",
-              width: "1.5rem",
-            }}
-            src="/bell-3-128.png"
-          />
-          <img
-            style={{
-              margin: "10px",
-              width: "1.5rem",
-            }}
-            src="/chat-4-256.png"
-          />
+
+          <Popover isLazy>
+            <PopoverTrigger>
+              <Button
+                _hover={{
+                  bg: "none",
+                }}
+                bg="none"
+                p={0}
+              >
+                <img
+                  style={{
+                    margin: "10px",
+                    width: "1.5rem",
+                  }}
+                  src="/bell-3-128.png"
+                />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader fontWeight="semibold">Notifications</PopoverHeader>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore.
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+
+          <Popover isLazy>
+            <PopoverTrigger>
+              <Button
+                _hover={{
+                  bg: "none",
+                }}
+                bg="none"
+                p={0}
+              >
+                <img
+                  style={{
+                    margin: "10px",
+                    width: "1.5rem",
+                  }}
+                  src="/chat-4-256.png"
+                />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader fontWeight="semibold">Inbox</PopoverHeader>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverBody>
+                {arr.map((item, index) => {
+                  return (
+                    <MessageCard key={index} name={item.name} url={item.url} />
+                  );
+                })}
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
           <Menu>
             <MenuButton
               bg={`url(${"/profile.jpeg"})`}

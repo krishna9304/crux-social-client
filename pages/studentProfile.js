@@ -9,14 +9,8 @@ import {
   Text,
   Editable,
   EditableInput,
-  EditableControls,
   EditablePreview,
   useEditableControls,
-  IconButton,
-  CheckIcon,
-  CloseIcon,
-  ButtonGroup,
-  EditIcon,
   Button,
   Divider,
 } from "@chakra-ui/react";
@@ -43,7 +37,6 @@ export default function StudentProfile() {
     ) : (
       <Flex ml={3} justifyContent="center">
         <Button
-          isDisabled
           _hover={{
             bg: "#600008",
           }}
