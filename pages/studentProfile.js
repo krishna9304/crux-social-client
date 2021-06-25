@@ -16,6 +16,9 @@ import {
 } from "@chakra-ui/react";
 import { NavBar } from "../components/navbar";
 import PostCarousel from "../components/postcarousel";
+import { Bio } from "../components/studentprofilegrids/Bio";
+import { StudentPosts } from "../components/studentprofilegrids/student-posts";
+import { OtherInfo } from "../components/studentprofilegrids/other-info";
 
 export default function StudentProfile() {
   const EditableControls = () => {
@@ -122,55 +125,7 @@ export default function StudentProfile() {
           colSpan={3}
           bg="#E5E5E5"
         >
-          <Box
-            mt={3}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            bg="#AE0032"
-            w="23vw"
-            h="4vh"
-          >
-            <Text
-              fontStyle="normal"
-              fontWeight="bold"
-              fontSize="1.5vh"
-              color="#ffffff"
-              lineHeight="22px"
-              display="flex"
-              alignItems="center"
-              textAlign="center"
-              textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            >
-              All Posts
-            </Text>
-          </Box>
-          <Flex
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            ml={3}
-            mr={3}
-            bg="#ffffff"
-            w="23vw"
-            h="20rem"
-            justify="center"
-            align="center"
-            flexDir="column"
-          >
-            <Box
-              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              ml={3}
-              mr={3}
-              bg="#ffffff"
-              w="20vw"
-              h="15rem"
-            >
-              <PostCarousel />
-            </Box>
-          </Flex>
+          <StudentPosts />
         </GridItem>
         <GridItem
           rowSpan={7}
@@ -180,52 +135,7 @@ export default function StudentProfile() {
           colSpan={6}
           bg="#E5E5E5"
         >
-          <Flex justify="center" align="center" flexDirection="column">
-            <Flex
-              p={7}
-              pt={0}
-              mt={4}
-              align="center"
-              justify="flex-start"
-              flexDirection="column"
-              borderRadius="2vw 2vw 0 0"
-              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              bg="#AE0032"
-              w="48vw"
-              h="auto"
-              minHeight="52.2vh"
-            >
-              <Flex
-                m={4}
-                mt={6}
-                w="100%"
-                h="1vh"
-                align="center"
-                justify="center"
-              >
-                <Text
-                  textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  fontWeight="bold"
-                  color="#ffffff"
-                  fontSize={22}
-                >
-                  About Me
-                </Text>
-              </Flex>
-              <Text color="#ffffff" fontSize={14}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Flex>
-          </Flex>
+          <Bio />
         </GridItem>
         <GridItem
           display="flex"
@@ -236,149 +146,7 @@ export default function StudentProfile() {
           colSpan={3}
           bg="#E5E5E5"
         >
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            mt={3}
-            mr={3}
-            ml={2}
-            bg="#AE0032"
-            w="23vw"
-            h="4vh"
-          >
-            <Text
-              fontStyle="normal"
-              fontWeight="bold"
-              fontSize="1.5vh"
-              color="#ffffff"
-              lineHeight="22px"
-              display="flex"
-              alignItems="center"
-              textAlign="center"
-              textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            >
-              Other Info
-            </Text>
-          </Box>
-          <Flex
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            mr={3}
-            ml={2}
-            bg="#ffffff"
-            w="23vw"
-            h="20rem"
-            justify="flex-start"
-            align="center"
-            flexDir="column"
-            p={5}
-          >
-            <Flex align="center" w="100%" flexDir="column">
-              <Text
-                fontStyle="normal"
-                fontWeight="bold"
-                fontSize="2vh"
-                color="#ae0032"
-                lineHeight="22px"
-                display="flex"
-                alignItems="center"
-                textAlign="center"
-                textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              >
-                Clubs :
-              </Text>
-              <Flex
-                justifyContent="center"
-                align="center"
-                flexWrap="wrap"
-                justify="flex-start"
-              >
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-              </Flex>
-            </Flex>
-            <Divider m={3} />
-            <Flex align="center" w="100%" flexDir="column">
-              <Text
-                fontStyle="normal"
-                fontWeight="bold"
-                fontSize="2vh"
-                color="#ae0032"
-                lineHeight="22px"
-                display="flex"
-                alignItems="center"
-                textAlign="center"
-                textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              >
-                Social Links :
-              </Text>
-              <Flex
-                justifyContent="center"
-                align="center"
-                flexWrap="wrap"
-                justify="flex-start"
-              >
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-                <Circle
-                  shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  m={1}
-                  ml={0}
-                  size="35px"
-                  bg="#AE0032"
-                />
-              </Flex>
-            </Flex>
-          </Flex>
+          <OtherInfo />
         </GridItem>
       </Grid>
     </Box>

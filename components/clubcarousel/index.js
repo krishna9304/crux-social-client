@@ -30,7 +30,7 @@ const arr = [
   },
 ];
 
-export default function Carousel() {
+export default function ClubCarousel() {
   const [value, setValue] = React.useState(1);
   const [delay, setDelay] = React.useState(5000);
   const [text, setText] = React.useState("");

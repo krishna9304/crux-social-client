@@ -24,6 +24,9 @@ import { NavBar } from "../components/navbar";
 import PostCarousel from "../components/postcarousel";
 import { arr } from "./homepage";
 import { MemberCard } from "../components/membercard";
+import { ClubDescription } from "../components/clubprofilegrids/club-description";
+import Clubmembers from "../components/clubprofilegrids/clubmembers";
+import { ClubsPost } from "../components/clubprofilegrids/club-posts";
 export default function StudentProfile() {
   const EditableControls = () => {
     const { isEditing, getSubmitButtonProps, getEditButtonProps } =
@@ -130,55 +133,7 @@ export default function StudentProfile() {
           colSpan={3}
           bg="#E5E5E5"
         >
-          <Box
-            mt={3}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            bg="#AE0032"
-            w="23vw"
-            h="4vh"
-          >
-            <Text
-              fontStyle="normal"
-              fontWeight="bold"
-              fontSize="1.5vh"
-              color="#ffffff"
-              lineHeight="22px"
-              display="flex"
-              alignItems="center"
-              textAlign="center"
-              textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            >
-              All Posts
-            </Text>
-          </Box>
-          <Flex
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            ml={3}
-            mr={3}
-            bg="#ffffff"
-            w="23vw"
-            h="20rem"
-            justify="center"
-            align="center"
-            flexDir="column"
-          >
-            <Box
-              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              ml={3}
-              mr={3}
-              bg="#ffffff"
-              w="20vw"
-              h="15rem"
-            >
-              <PostCarousel />
-            </Box>
-          </Flex>
+          <ClubsPost />
         </GridItem>
         <GridItem
           rowSpan={7}
@@ -188,52 +143,7 @@ export default function StudentProfile() {
           colSpan={6}
           bg="#E5E5E5"
         >
-          <Flex justify="center" align="center" flexDirection="column">
-            <Flex
-              p={7}
-              pt={0}
-              mt={4}
-              align="center"
-              justify="flex-start"
-              flexDirection="column"
-              borderRadius="2vw 2vw 0 0"
-              shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-              bg="#AE0032"
-              w="48vw"
-              h="auto"
-              minHeight="52.2vh"
-            >
-              <Flex
-                m={4}
-                mt={6}
-                w="100%"
-                h="1vh"
-                align="center"
-                justify="center"
-              >
-                <Text
-                  textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-                  fontWeight="bold"
-                  color="#ffffff"
-                  fontSize={18}
-                >
-                  Club Description
-                </Text>
-              </Flex>
-              <Text color="#ffffff" fontSize={14}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </Text>
-            </Flex>
-          </Flex>
+          <ClubDescription />
         </GridItem>
         <GridItem
           display="flex"
@@ -244,56 +154,7 @@ export default function StudentProfile() {
           colSpan={3}
           bg="#E5E5E5"
         >
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            textAlign="center"
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            mt={3}
-            mr={3}
-            ml={2}
-            bg="#AE0032"
-            w="23vw"
-            h="4vh"
-          >
-            <Text
-              fontStyle="normal"
-              fontWeight="bold"
-              fontSize="1.5vh"
-              color="#ffffff"
-              lineHeight="22px"
-              display="flex"
-              alignItems="center"
-              textAlign="center"
-              textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            >
-              Club Members
-            </Text>
-          </Box>
-          <Flex
-            borderRadius="2vw"
-            shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
-            mr={3}
-            ml={2}
-            bg="#ffffff"
-            w="23vw"
-            h="85%"
-            justify="flex-start"
-            align="center"
-            flexDir="column"
-            p={4}
-            overflowY="scroll"
-            overflowX="hidden"
-          >
-            {arr.map((item) => {
-              return <MemberCard name={item.name} url={item.url} />;
-            })}
-            {arr.map((item) => {
-              return <MemberCard name={item.name} url={item.url} />;
-            })}
-          </Flex>
+          <Clubmembers />
         </GridItem>
       </Grid>
     </Box>
