@@ -1,8 +1,5 @@
-import Head from "next/head";
-import Link from "next/link";
 import { Box, Flex, Text, Button, Textarea } from "@chakra-ui/react";
 import { Post } from "../post";
-import { arr } from "../../pages/homepage";
 export const GridCenter = () => {
   return (
     <Flex justify="center" align="center" flexDirection="column">

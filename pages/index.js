@@ -13,6 +13,9 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAuth, setClassmates, setUser } from "../redux/actions/actions";
+import axios from "axios";
 
 export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -33,23 +36,18 @@ export function useMediaQuery(query) {
 }
 
 export default function Home() {
+  const [loginData, setLoginData] = useState({
+    college: "",
+    regdNo: "",
+    password: "",
+  });
+  let global_state = useSelector((state) => state);
+  let dispatch = useDispatch();
+  console.log(global_state);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   let isPageWide = useMediaQuery("(max-width: 651px)");
-  let [style, setStyle] = useState({
-    width: "0",
-  });
-  useEffect(() => {
-    if (!isPageWide) {
-      setStyle({
-        width: "5vw",
-      });
-    } else {
-      setStyle({
-        width: "0",
-      });
-    }
-  });
+
   return (
     <Box
       bg="#AE0032"
@@ -94,10 +92,7 @@ export default function Home() {
           <Flex
             m={3}
             w="90%"
-            h={() => {
-              if (!isPageWide) return "10vh";
-              else return "0";
-            }}
+            h={!isPageWide ? "10vh" : "0"}
             justify="center"
             align="center"
           >
@@ -106,23 +101,23 @@ export default function Home() {
               pr={2}
               style={{
                 fontFamily: "Archivo Black, sans-serif",
-                fontSize: style.width,
+                fontSize: !isPageWide ? "5vw" : "0",
                 color: "#FFFFFF",
               }}
             >
-              WELCOME TO
+              WELCOME TO&nbsp;
             </Text>
             <img
               src="/cru_auto_x2 2.png"
               style={{
-                height: style.width,
+                height: !isPageWide ? "5vw" : "0",
               }}
             />
           </Flex>
           <Box
             m={5}
             w="90vw"
-            h="55vh"
+            h="60vh"
             bg="#FBFBFB"
             borderRadius="0 0 28px 28px"
             boxShadow="dark-lg"
@@ -141,7 +136,7 @@ export default function Home() {
               <Text
                 style={{
                   fontFamily: "Architects Daughter, cursive",
-                  fontSize: "2rem",
+                  fontSize: !isPageWide ? "2rem" : "1.5rem",
                   color: "#FFFFFF",
                 }}
               >
@@ -151,19 +146,35 @@ export default function Home() {
             <Flex direction="column" m={5} p={3} alignItems="center">
               <FormControl id="university" isRequired>
                 <FormLabel color="#581845">University/College</FormLabel>
-                <Select color="black" placeholder="Select country">
-                  <option>ITER,SOA University</option>
-                  <option>KIIT University</option>
+                <Select
+                  onChange={(e) => {
+                    setLoginData({ ...loginData, college: e.target.value });
+                  }}
+                  value={loginData.college}
+                  color="black"
+                  placeholder="Select College"
+                >
+                  <option value="ITER">ITER,SOA University</option>
+                  <option value="KIIT">KIIT University</option>
                 </Select>
               </FormControl>
               <FormControl mt={1} id="username" isRequired>
-                <FormLabel color="#581845">Username</FormLabel>
-                <Input color="black" placeholder="Username" />
+                <FormLabel color="#581845">Registration No.</FormLabel>
+                <Input
+                  onChange={(e) => {
+                    setLoginData({ ...loginData, regdNo: e.target.value });
+                  }}
+                  color="black"
+                  placeholder="Registration No."
+                />
               </FormControl>
               <FormControl mt={1} id="password" isRequired>
                 <FormLabel color="#581845">Password</FormLabel>
                 <InputGroup size="md">
                   <Input
+                    onChange={(e) => {
+                      setLoginData({ ...loginData, password: e.target.value });
+                    }}
                     color="black"
                     pr="4.5rem"
                     type={show ? "text" : "password"}
@@ -182,6 +193,31 @@ export default function Home() {
                 </InputGroup>
               </FormControl>
               <Button
+                onClick={() => {
+                  console.log(loginData);
+                  axios
+                    .post("http://localhost:8080/api/v1/auth/login", loginData)
+                    .then((res) => {
+                      if (res.data.res) {
+                        dispatch(setUser(res.data.userdata));
+                        dispatch(setAuth(true));
+                        document.cookie = "jwt=" + res.data.jwt;
+                        axios
+                          .post(
+                            "http://localhost:8080/api/v1/classmates/getClassmates",
+                            res.data.userdata
+                          )
+                          .then((classRes) => {
+                            dispatch(setClassmates(classRes.data.classmates));
+                          })
+                          .catch((err) => window.alert(err));
+                        window.alert(res.data.msg);
+                      } else {
+                        window.alert(res.data.msg);
+                      }
+                    })
+                    .catch((err) => window.alert(err));
+                }}
                 shadow="lg"
                 m={5}
                 _hover={{ bg: "#600008" }}

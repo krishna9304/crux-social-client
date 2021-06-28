@@ -8,7 +8,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -18,11 +17,12 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import socket from "../../services/socket";
 
 export const Post = () => {
   const [isliked, setliked] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const [comment, setComment] = useState("");
   return (
     <Flex
       mt={2}
@@ -177,9 +177,20 @@ export const Post = () => {
           <ModalBody></ModalBody>
           <ModalFooter>
             <InputGroup>
-              <Input variant="filled" placeholder="Write a message" />
+              <Input
+                value={comment}
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+                variant="filled"
+                placeholder="Write a message"
+              />
               <InputRightElement mr={1} width="5rem">
                 <Button
+                  onClick={() => {
+                    socket.emit("comment", comment);
+                    setComment("");
+                  }}
                   _hover={{
                     bg: "#600008",
                   }}
