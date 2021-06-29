@@ -1,8 +1,15 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setClassmates, setUser } from "./redux/actions/actions";
+import {
+  setAuth,
+  setClassmates,
+  setCollege,
+  setUser,
+} from "./redux/actions/actions";
+import Home from "./pages";
+import Loader from "./components/loader";
 
 export function extractCookies(cookieStr) {
   return cookieStr
@@ -17,7 +24,7 @@ export function extractCookies(cookieStr) {
 
 const GlobalApp = ({ Component, pageProps }) => {
   let globalState = useSelector((state) => state);
-
+  let [authDone, setAuthDone] = useState(false);
   let dispatch = useDispatch();
   let authUser = () => {
     if (document.cookie !== null && document.cookie !== "") {
@@ -33,7 +40,8 @@ const GlobalApp = ({ Component, pageProps }) => {
               if (res.data.res) {
                 dispatch(setAuth(true));
                 dispatch(setUser(res.data.userdata));
-                window.alert("token verified");
+                dispatch(setCollege(res.data.college));
+                console.log("token verified");
                 axios
                   .post(
                     "http://localhost:8080/api/v1/classmates/getClassmates",
@@ -42,14 +50,17 @@ const GlobalApp = ({ Component, pageProps }) => {
                   .then((classRes) => {
                     dispatch(setClassmates(classRes.data.classmates));
                   })
-                  .catch((err) => window.alert(err));
+                  .catch((err) => console.log(err));
+                setAuthDone(true);
               } else {
                 dispatch(setAuth(false));
                 dispatch(setUser(null));
+                setAuthDone(true);
               }
             } catch (err) {
               dispatch(setAuth(false));
               dispatch(setUser(null));
+              setAuthDone(true);
               console.log(err);
             }
           })
@@ -57,18 +68,25 @@ const GlobalApp = ({ Component, pageProps }) => {
       } else {
         dispatch(setAuth(false));
         dispatch(setUser(null));
+        setAuthDone(true);
       }
     } else {
       dispatch(setAuth(false));
       dispatch(setUser(null));
+      setAuthDone(true);
     }
   };
   useEffect(() => {
     authUser();
   }, []);
+
+  if (authDone === false) {
+    return <Loader />;
+  }
+
   return (
     <ChakraProvider>
-      <Component {...pageProps} />
+      {!globalState.auth ? <Home /> : <Component {...pageProps} />}
     </ChakraProvider>
   );
 };

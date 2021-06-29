@@ -12,3 +12,7 @@ export const setAuth = (auth) => ({
   type: ActionTypes.AUTH,
   payload: auth,
 });
+export const setCollege = (college) => ({
+  type: ActionTypes.SET_COLLEGE,
+  payload: college,
+});

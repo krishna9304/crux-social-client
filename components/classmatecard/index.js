@@ -1,10 +1,8 @@
 import { Flex, Circle, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { useState } from "react";
-import StudentProfile from "../../pages/studentProfile";
 export const ClassmateCard = (props) => {
   return (
-    <Link href="/studentProfile">
+    <Link href={`/studentprofile/${props.id}?name=${props.name}`}>
       <Flex
         _hover={{
           cursor: "pointer",

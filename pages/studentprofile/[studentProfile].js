@@ -1,26 +1,34 @@
 import Head from "next/head";
-import Link from "next/link";
 import {
   Box,
   Grid,
   GridItem,
   Flex,
   Circle,
-  Text,
   Editable,
   EditableInput,
   EditablePreview,
   useEditableControls,
   Button,
-  Divider,
 } from "@chakra-ui/react";
-import { NavBar } from "../components/navbar";
-import PostCarousel from "../components/postcarousel";
-import { Bio } from "../components/studentprofilegrids/Bio";
-import { StudentPosts } from "../components/studentprofilegrids/student-posts";
-import { OtherInfo } from "../components/studentprofilegrids/other-info";
+import { NavBar } from "../../components/navbar";
+import { Bio } from "../../components/studentprofilegrids/Bio";
+import { StudentPosts } from "../../components/studentprofilegrids/student-posts";
+import { OtherInfo } from "../../components/studentprofilegrids/other-info";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function StudentProfile() {
+  let globalState = useSelector((state) => state);
+  const router = useRouter();
+  const { studentProfile, name } = router.query;
+  let i;
+  let student = globalState.classmates.map((currStudent, idx) => {
+    if (currStudent._id === studentProfile) {
+      i = idx;
+      return currStudent;
+    }
+  });
   const EditableControls = () => {
     const { isEditing, getSubmitButtonProps, getEditButtonProps } =
       useEditableControls();
@@ -94,7 +102,7 @@ export default function StudentProfile() {
               justifyContent="center"
               alignItems="center"
               textAlign="center"
-              defaultValue="Profile Name"
+              defaultValue={student[i].name}
               fontSize="2xl"
               isPreviewFocusable={false}
             >
@@ -135,7 +143,7 @@ export default function StudentProfile() {
           colSpan={6}
           bg="#E5E5E5"
         >
-          <Bio />
+          <Bio bio={student[i].bio} />
         </GridItem>
         <GridItem
           display="flex"

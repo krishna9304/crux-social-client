@@ -72,13 +72,6 @@ export default function PostCarousel() {
       arr[value].show = "block";
     }
   };
-  useInterval(() => {
-    value === 4 ? setValue(1) : setValue(value + 1);
-    arr.map((i) => {
-      return (i.show = "none");
-    });
-    arr[value].show = "block";
-  }, delay);
   return (
     <>
       <div
@@ -143,7 +136,7 @@ export default function PostCarousel() {
           onClick={handleChange}
           id="-"
         >{`<`}</Button>
-        {arr.map((item) => {
+        {arr.map((item, key) => {
           if (item.show === "block")
             return (
               <Text
@@ -156,6 +149,7 @@ export default function PostCarousel() {
                 display="flex"
                 alignItems="center"
                 textAlign="center"
+                key={key}
                 textShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
               >
                 {item.id}/{arr.length}
@@ -321,23 +315,4 @@ export default function PostCarousel() {
       </Modal>
     </>
   );
-}
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest function.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
 }

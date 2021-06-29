@@ -25,8 +25,10 @@ import { useState } from "react";
 import { useMediaQuery } from "../../pages";
 import { MessageCard } from "../messageCards";
 import { arr } from "../../pages/homepage";
+import { useSelector } from "react-redux";
 
 export const NavBar = () => {
+  let globalState = useSelector((state) => state);
   let isPageWide = useMediaQuery("(max-width: 743px)");
   let [isclose, setclose] = useState(true);
   return (
@@ -53,7 +55,7 @@ export const NavBar = () => {
           fontFamily="Fontdiner Swanky, cursive"
           width="max-content"
         >
-          COLLEGE NAME
+          {globalState.college}
         </Text>
       ) : null}
       {!isPageWide ? (
@@ -130,7 +132,7 @@ export const NavBar = () => {
           </Popover>
           <Menu>
             <MenuButton
-              bg={`url(${"/profile.jpeg"})`}
+              bg={`url(${globalState.user.profilepPic})`}
               backgroundRepeat="no-repeat"
               backgroundSize="cover"
               ml={3}
@@ -140,12 +142,12 @@ export const NavBar = () => {
               borderRadius="50%"
               as={Button}
               _active={{
-                bg: `url(${"/profile.jpeg"})`,
+                bg: `url(${globalState.user.profilepPic})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
               }}
               _hover={{
-                bg: `url(${"/profile.jpeg"})`,
+                bg: `url(${globalState.user.profilepPic})`,
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
               }}

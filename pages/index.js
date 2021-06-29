@@ -14,8 +14,15 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuth, setClassmates, setUser } from "../redux/actions/actions";
+import {
+  setAuth,
+  setClassmates,
+  setCollege,
+  setUser,
+} from "../redux/actions/actions";
 import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
@@ -43,10 +50,15 @@ export default function Home() {
   });
   let global_state = useSelector((state) => state);
   let dispatch = useDispatch();
-  console.log(global_state);
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   let isPageWide = useMediaQuery("(max-width: 651px)");
+  let router = useRouter();
+  useEffect(() => {
+    if (global_state.auth) {
+      router.push("/homepage");
+    }
+  }, []);
 
   return (
     <Box
@@ -192,43 +204,49 @@ export default function Home() {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <Button
-                onClick={() => {
-                  console.log(loginData);
-                  axios
-                    .post("http://localhost:8080/api/v1/auth/login", loginData)
-                    .then((res) => {
-                      if (res.data.res) {
-                        dispatch(setUser(res.data.userdata));
-                        dispatch(setAuth(true));
-                        document.cookie = "jwt=" + res.data.jwt;
-                        axios
-                          .post(
-                            "http://localhost:8080/api/v1/classmates/getClassmates",
-                            res.data.userdata
-                          )
-                          .then((classRes) => {
-                            dispatch(setClassmates(classRes.data.classmates));
-                          })
-                          .catch((err) => window.alert(err));
-                        window.alert(res.data.msg);
-                      } else {
-                        window.alert(res.data.msg);
-                      }
-                    })
-                    .catch((err) => window.alert(err));
-                }}
-                shadow="lg"
-                m={5}
-                _hover={{ bg: "#600008" }}
-                bg="#77000A"
-                w="10rem"
-                borderRadius="27px"
-                color="#FFFFFF"
-                variant="solid"
-              >
-                LOGIN
-              </Button>
+              <Link href="/homepage">
+                <Button
+                  onClick={() => {
+                    console.log(loginData);
+                    axios
+                      .post(
+                        "http://localhost:8080/api/v1/auth/login",
+                        loginData
+                      )
+                      .then((res) => {
+                        if (res.data.res) {
+                          dispatch(setUser(res.data.userdata));
+                          dispatch(setAuth(true));
+                          dispatch(setCollege(res.data.college));
+                          document.cookie = "jwt=" + res.data.jwt;
+                          axios
+                            .post(
+                              "http://localhost:8080/api/v1/classmates/getClassmates",
+                              res.data.userdata
+                            )
+                            .then((classRes) => {
+                              dispatch(setClassmates(classRes.data.classmates));
+                            })
+                            .catch((err) => console.log(err));
+                          console.log(res.data.msg);
+                        } else {
+                          console.log(res.data.msg);
+                        }
+                      })
+                      .catch((err) => console.log(err));
+                  }}
+                  shadow="lg"
+                  m={5}
+                  _hover={{ bg: "#600008" }}
+                  bg="#77000A"
+                  w="10rem"
+                  borderRadius="27px"
+                  color="#FFFFFF"
+                  variant="solid"
+                >
+                  LOGIN
+                </Button>
+              </Link>
             </Flex>
           </Box>
         </Flex>

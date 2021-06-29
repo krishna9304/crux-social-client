@@ -2,8 +2,10 @@ import Link from "next/link";
 import { Box, Flex, Text, Circle } from "@chakra-ui/react";
 import { ClassmateCard } from "../classmatecard";
 import { arr } from "../../pages/homepage";
+import { useSelector } from "react-redux";
 
 export const GridLeft = () => {
+  let globalState = useSelector((state) => state);
   return (
     <Flex
       position="sticky"
@@ -32,7 +34,7 @@ export const GridLeft = () => {
           <Circle
             shadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
             size="6.5vw"
-            bg={`url(${"/profile.jpeg"})`}
+            bg={`url(${globalState.user.profilepPic})`}
             backgroundRepeat="no-repeat"
             backgroundSize="cover"
           />
@@ -44,7 +46,7 @@ export const GridLeft = () => {
             color="#AE0032"
             fontSize="max(1.1vw , 10px)"
           >
-            Krishna Mahato
+            {globalState.user.name}
           </Text>
           <Link href="/">
             <a
@@ -110,14 +112,14 @@ export const GridLeft = () => {
           w="23vw"
           h="65vh"
         >
-          {arr.map((item, index) => {
+          {globalState.classmates.map((item, index) => {
             return (
-              <ClassmateCard key={index} url={item.url} name={item.name} />
-            );
-          })}
-          {arr.map((item, index) => {
-            return (
-              <ClassmateCard key={index} url={item.url} name={item.name} />
+              <ClassmateCard
+                key={index}
+                id={item._id}
+                url={item.profilepPic}
+                name={item.name}
+              />
             );
           })}
         </Flex>
